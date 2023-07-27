@@ -1,0 +1,7 @@
+POST http://localhost:3009/api/greet/
+content-type: application/json
+
+{
+	"language" : "xhosa",
+	"greeting" : "Molo"
+}

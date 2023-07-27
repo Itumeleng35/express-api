@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" defer></script>
+
+</head>
+
+<body class="body">
+    <h1>Greet API Widget</h1>
+
+    <div x-data="{
+        username : '',
+        greeting : 'Hello',
+        language : '',
+        greet() {
+
+            // call the API and get the greeting back 
+            this.greeting = this.username
+            axios
+            .get(`/api/greet?username=${this.username}&language=${this.language}`)
+            .then(result => {
+                if (result.data.error) {
+                    this.greeting = result.data.error
+                } else {
+                    this.greeting = result.data.message
+
+                }
+                
+            })
+
+
+        }
+    }">
+    <div>
+        <input type="radio" x-model="language" value="english" id="english">
+        <label for="english">English</label>
+        <input type="radio" x-model="language" value="xhosa" id="xhosa">
+        <label for="xhosa">Xhosa</label>
+        <input type="radio" x-model="language" value="zulu" id="zulu">
+        <label for="zulu">Zulu</label>
+
+    </div>
+    <div x-text="greeting">
+    </div>
+
+    <div x-text="language">
+    </div>
+
+    <input type="text" x-model="username">
+    <input type="button" value="Greet" x-on:click="greet()">
+
+ 
+       
+    </div>
+
+   
+
+
+
+
+</body>
+</html>
